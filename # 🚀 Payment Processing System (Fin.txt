@@ -1,0 +1,179 @@
+# 🚀 Payment Processing System (Fintech Backend)
+
+## 📌 Project Setup (Initial Phase)
+
+This project is a **real-time payment processing system** built using **Java, Spring Boot, MySQL, and Redis**, designed to simulate fintech-grade transaction handling with consistency, scalability, and safety.
+
+---
+
+## 🧰 Prerequisites
+
+Ensure the following are installed:
+
+* Java 17+
+* Maven
+* MySQL (running)
+* Redis (installed, will be used later)
+* IDE (Eclipse / IntelliJ)
+
+---
+
+## 🗄️ Database Setup
+
+```sql
+CREATE DATABASE payment_system;
+```
+
+---
+
+## ⚙️ Application Configuration
+
+Add in `application.properties`:
+
+```properties
+server.port=8080
+
+spring.datasource.url=jdbc:mysql://localhost:3306/payment_system
+spring.datasource.username=root
+spring.datasource.password=root
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+```
+
+---
+
+## 📁 Project Structure (Phase 1 - Foundation)
+
+```text
+com.anurag.paymentsystem
+│
+├── PaymentSystemApplication.java
+│
+├── controller
+│     ├── AccountController.java
+│     └── TransactionController.java
+│
+├── service
+│     ├── AccountService.java
+│     └── TransactionService.java
+│
+├── service.impl
+│     ├── AccountServiceImpl.java
+│     └── TransactionServiceImpl.java
+│
+├── repository
+│     ├── AccountRepository.java
+│     └── TransactionRepository.java
+│
+├── entity
+│     ├── Account.java
+│     └── Transaction.java
+│
+├── dto
+│     ├── AccountRequestDTO.java
+│     ├── TransferRequestDTO.java
+│     └── TransactionResponseDTO.java
+│
+└── exception
+      └── GlobalExceptionHandler.java
+```
+
+---
+
+## 🧱 Architecture Pattern
+
+The project follows **Layered Architecture**:
+
+```text
+Controller → Service → Repository → Database
+```
+
+### Responsibilities:
+
+* **Controller** → Handles HTTP requests
+* **Service** → Business logic (core fintech logic)
+* **Repository** → DB interaction (JPA)
+* **Entity** → Database tables
+* **DTO** → Request/Response models
+
+---
+
+## ⚠️ Important Design Principles
+
+* Separation of concerns (clean architecture)
+* Stateless REST APIs
+* Database-first consistency approach
+* Scalable modular design
+
+---
+
+## 🧪 Initial Test Endpoint
+
+```http
+GET /test
+```
+
+Response:
+
+```text
+Payment System Running 🚀
+```
+
+---
+
+## 🎯 Phase 1 Goals
+
+* Create Account
+* Add Balance
+* Transfer Money (basic)
+* Store Transactions
+
+---
+
+## 🧠 Why This Structure Matters
+
+This structure ensures:
+
+* Maintainability
+* Scalability
+* Clear separation of logic
+* Industry-standard backend design
+
+---
+
+## 📌 Notes (IMPORTANT)
+
+* Do NOT use H2 → Use MySQL (real-world behavior)
+* Keep entities clean (no business logic inside)
+* Services should handle all transaction logic
+* This project will evolve into:
+
+  * Idempotency system
+  * Concurrency-safe system
+  * Redis-powered system
+
+---
+## 🧱 Entity Design
+
+### Account Entity
+- Stores user balance using BigDecimal for financial precision
+- Uses optimistic locking (@Version) to prevent race conditions
+
+### Transaction Entity
+- Stores transfer history with status tracking
+- Maintains audit trail for all operations
+
+### Key Design Decisions
+- Used IDs instead of foreign key mapping for better performance
+- Implemented versioning for concurrency control
+- Ensured financial precision using BigDecimal
+
+
+---
+## 👨‍💻 Author
+
+Anurag Kumbhare
+
+---
